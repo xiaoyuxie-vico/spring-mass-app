@@ -62,7 +62,7 @@ def main():
 
     str_1 = '''1. Illustrate the motion of the mass with time captured by camera.'''
     str_2 = '''2. Reduce the dimension of the camera data and identify the intrinsic dimension by principal component analysis (PCA).'''
-    str_3 = '''3. Identify governing physical parameters for the spring mass system (natural frequency, mass, spring constant, damping, etc.'''
+    str_3 = '''3. Identify governing physical parameters for the spring mass system (spring constant and damping)'''
 
     st.markdown('<p class="L2">{}</p>'.format(str_1), unsafe_allow_html=True)
     st.markdown('<p class="L2">{}</p>'.format(str_2), unsafe_allow_html=True)
@@ -280,12 +280,12 @@ def main():
 
     r_sq = model.score(THETA, Z_2dot)
 
-    st.markdown('<p class="L2">Fitting performance: The coefficient of determination is {}</p>'.format(round(r_sq, 2)), unsafe_allow_html=True)
-    # print('Coefficients:', model.coef_)
-
     st.markdown('<p class="L2">Identified coefficients: ({}, {})</p>'.format(
         round(model.coef_[0], 4), round(model.coef_[1], 4)), unsafe_allow_html=True)
 
+    st.markdown('<p class="L2">Fitting performance: The coefficient of determination is {}</p>'.format(
+    round(r_sq, 2)), unsafe_allow_html=True)
+    
     st.markdown('<p class="L2">Set the mass:</p>', unsafe_allow_html=True)
     m = float(st.text_input('', 0.1))
     k = -model.coef_[0]*m
