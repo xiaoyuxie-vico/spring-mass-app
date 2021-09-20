@@ -212,6 +212,9 @@ def main():
     ##########################ODE##########################
     st.markdown('<p class="L1">Recover ordinary differential equation (ODE)</p>',
                 unsafe_allow_html=True)
+
+    st.markdown('<p class="L2">Reduce 3 set of camera data into 1 set of data.</p>',
+                unsafe_allow_html=True)
     #recover ODE
     z = B[:, 1]
     Z = np.stack((z), axis=-1)  # First column is x, second is y
@@ -280,8 +283,9 @@ def main():
 
     r_sq = model.score(THETA, Z_2dot)
 
-    st.markdown('<p class="L2">Identified coefficients: ({}, {})</p>'.format(
-        round(model.coef_[0], 4), round(model.coef_[1], 4)), unsafe_allow_html=True)
+    st.markdown('<p class="L2">Identified coefficients:</p>', unsafe_allow_html=True)
+    st.markdown('$\\alpha: {}$'.format(round(model.coef_[0], 4)))
+    st.markdown('$\\beta: {}$'.format(round(model.coef_[1], 4)))
 
     st.markdown('<p class="L2">Fitting performance: The coefficient of determination is {}</p>'.format(
     round(r_sq, 2)), unsafe_allow_html=True)
