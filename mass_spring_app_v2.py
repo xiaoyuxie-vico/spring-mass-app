@@ -34,7 +34,6 @@ def main():
         # layout='wide'
     )
     st.title('Spring-mass-damping system analysis')
-    st.write('developed by Xiaoyu Xie and Zhengtao Gan.')
     # level 1 font
     st.markdown("""
         <style>
