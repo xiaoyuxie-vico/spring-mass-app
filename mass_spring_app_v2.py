@@ -57,6 +57,7 @@ def main():
         unsafe_allow_html=True
     )
     #########################Objectives#########################
+    st.markdown('<p class="L2">developed by Xiaoyu Xie and Zhengtao Gan.</p>', unsafe_allow_html=True)
 
     st.markdown('<p class="L1">Objectives</p>', unsafe_allow_html=True)
 
