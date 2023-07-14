@@ -33,7 +33,7 @@ def main():
         page_icon=':eyeglasses:',
         # layout='wide'
     )
-    st.title('Spring-mass-damping system analysis')
+    st.title('Spring-mass-damper system analysis')
     # level 1 font
     st.markdown("""
         <style>
@@ -90,26 +90,34 @@ def main():
     flag = ['New dataset', 'Default dataset']
     st.markdown('<p class="L2">Chosse a new dataset or use default dataset:</p>',
                 unsafe_allow_html=True)
-    use_new_data = st.selectbox('', flag, 1)
+    use_new_data = st.selectbox('', flag, 0)
 
     # load dataset
     if use_new_data == 'New dataset':
         uploaded_file = st.file_uploader(
             'Choose a CSV file', accept_multiple_files=False)
 
-    # button_dataset = st.button('Click once you have selected a dataset')
-    # if button_dataset:
-    # load dataset
-    if use_new_data == 'New dataset':
-        data = io.BytesIO(uploaded_file.getbuffer())
-        df = pd.read_csv(data)
-        list = np.loadtxt(open("src/21data-new.csv", "rb"),
-                          delimiter=",", skiprows=1)
-    elif use_new_data == 'Default dataset':
-        file_path = 'src/21data-new.csv'
-        df = pd.read_csv(file_path)
-        list = np.loadtxt(open(file_path, "rb"),
-                          delimiter=",", skiprows=1)
+    # # button_dataset = st.button('Click once you have selected a dataset')
+    # # if button_dataset:
+    # # load dataset
+    # if use_new_data == 'New dataset':
+
+    #     if uploaded_file is not None:
+    #         data = io.BytesIO(uploaded_file.getbuffer())
+    #         # data = io.BytesIO(uploaded_file.getbuffer())
+    #         df = pd.read_csv(data)
+    #         list = np.loadtxt(open("src/21data-new.csv", "rb"),
+    #                           delimiter=",", skiprows=1)
+    #     else:
+    #         st.error("No file uploaded. Please upload a file.")
+
+        
+    # elif use_new_data == 'Default dataset':
+
+    file_path = 'src/21data-new.csv'
+    df = pd.read_csv(file_path)
+    list = np.loadtxt(open(file_path, "rb"),
+                      delimiter=",", skiprows=1)
 
     lines = ['Camera 1', 'Camera 2', 'Camera 3']
     st.markdown('<p class="L2">Select a camera to show data:</p>',
@@ -121,7 +129,8 @@ def main():
                 unsafe_allow_html=True)
     ratio = st.slider('', 0.01, 1.0, 1.0)
 
-    col1, col2, col3 = st.beta_columns(3)
+    # col1, col2, col3 = st.beta_columns(3)
+    col1, col2, col3 = st.columns(3)
     show_length = int(df.shape[0] * ratio)-1
     with col1:
         fig = plt.figure()
@@ -241,7 +250,7 @@ def main():
 
     Z_2dot = np.stack((z_2dot), axis=-1)  # First column is x, second is y
 
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         fig = plt.figure(figsize=(8, 6))
         ax = fig.add_subplot(111)
